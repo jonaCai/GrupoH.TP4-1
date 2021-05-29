@@ -13,8 +13,8 @@ namespace GrupoH.TP4
         List<Materia> Oferta;
         bool UltimasCuatro;
         bool SegundoLlamado;
-        List<Curso> Cursos;
-        List<Curso> Alternativos;
+        List<Curso> CursosPrincipales;
+        List<Curso> CursosAlternativos;
 
 
 
@@ -103,7 +103,7 @@ namespace GrupoH.TP4
                                         cursoElegido = int.Parse(Console.ReadLine());
                                         if (materia.Cursos.ContainsKey(cursoElegido))
                                         { 
-                                            Cursos.Add(materia.Cursos[cursoElegido]);
+                                            CursosPrincipales.Add(materia.Cursos[cursoElegido]);
                                             materia.Cursos.Remove(cursoElegido);            // Se quita para evitar que no se vuelva a elegir.
                                             break;
                                         }
@@ -119,7 +119,7 @@ namespace GrupoH.TP4
                                         alternativaElegida = int.Parse(Console.ReadLine());
                                         if (materia.Cursos.ContainsKey(alternativaElegida))
                                         {
-                                            Cursos.Add(materia.Cursos[alternativaElegida]);
+                                            CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
                                             materia.Cursos.Remove(alternativaElegida);
                                             break;
                                         }
@@ -213,8 +213,6 @@ namespace GrupoH.TP4
             //  ------A DESARROLLAR------   //
             //                              //
             //                              //
-
-
 
             return retorno;
         }
