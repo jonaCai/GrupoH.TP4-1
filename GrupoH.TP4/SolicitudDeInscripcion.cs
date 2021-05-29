@@ -13,14 +13,9 @@ namespace GrupoH.TP4
         List<Materia> Oferta;
         bool UltimasCuatro;
         bool SegundoLlamado;
-        Curso Curso1;
-        Curso Curso2;
-        Curso Curso3;
-        Curso Curso4;
-        Curso Alternativa1;
-        Curso Alternativa2;
-        Curso Alternativa3;
-        Curso Alternativa4;
+        List<Curso> Cursos;
+        List<Curso> Alternativos;
+
 
 
         internal static bool DeclaracionJurada()
@@ -33,7 +28,8 @@ namespace GrupoH.TP4
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool okUltimasCuatro = false;
-            bool okSeguirEligiendoCursos = false;
+            bool seguirEligiendoMaterias = true;
+            bool salir = false;
             int opcionElegida;
 
             Alumno.UltimaCursada();
@@ -60,14 +56,14 @@ namespace GrupoH.TP4
             } while (okUltimasCuatro == false);
 
             Oferta = CrearOfertaPersonalizada();
-
-            int contadorCursosElegidos = 1;
+            
             do
             {
                 Console.WriteLine(menu);
                 opcionElegida = int.Parse(Console.ReadLine());
                 int materiaElegida;
                 int cursoElegido;
+                int alternativaElegida;
 
                 switch (opcionElegida)
                 {
@@ -79,28 +75,82 @@ namespace GrupoH.TP4
                         }
                         break;
                     case 2:
+                        int contadorCursosElegidos = 1;
                         do
                         {
+                            if (contadorCursosElegidos == 4)
+                            {
+                                seguirEligiendoMaterias = false;
+                                break;
+                            }
+                            Console.WriteLine("Ingrese el codigo de la materia a la que desee inscribirse:");
                             materiaElegida = int.Parse(Console.ReadLine());
 
                             foreach (var materia in Oferta)
                             {
                                 if (materia.Codigo == materiaElegida)
                                 {
-                                    foreach (var curso in materia)
+                                    Console.WriteLine($"\tCursos disponibles para {materia.Nombre}");
+                                    foreach (var curso in materia.Cursos)
                                     {
-                                        Console.
+                                        Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
+
                                     }
+
+                                    do
+                                    {
+                                        Console.WriteLine("Elija un curso principal");
+                                        cursoElegido = int.Parse(Console.ReadLine());
+                                        if (materia.Cursos.ContainsKey(cursoElegido))
+                                        { 
+                                            Cursos.Add(materia.Cursos[cursoElegido]);
+                                            materia.Cursos.Remove(cursoElegido);            // Se quita para evitar que no se vuelva a elegir.
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("El curso seleccionado no existe.");
+                                        }
+                                    } while (true);
+
+                                    do
+                                    {
+                                        Console.WriteLine("Elija un curso alternativo");
+                                        alternativaElegida = int.Parse(Console.ReadLine());
+                                        if (materia.Cursos.ContainsKey(alternativaElegida))
+                                        {
+                                            Cursos.Add(materia.Cursos[alternativaElegida]);
+                                            materia.Cursos.Remove(alternativaElegida);
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("El curso seleccionado no existe.");
+                                        }
+                                    } while (true);
+
+                                    Console.WriteLine("Desea agregar otra materia? S o N (Maximo 4)");
+
+                                    //                              //
+                                    //                              //
+                                    //  ------A DESARROLLAR------   //
+                                    //  Desarrollar S o N para      //
+                                    //  continuar agregando mat.    //
+                                    //                              //
+                                    //                              //
+
+
                                 }
                             }
 
-
-                            {
-
-                            }
+                            contadorCursosElegidos++;
                             
-                        } while (true);
-                        
+                        } while (seguirEligiendoMaterias == true);                        
+                        break;
+                    case 9:
+                        Console.WriteLine("Saliendo...");
+                        salir = true;
+                        Console.ReadKey();
                         break;
                     default:
                         Console.WriteLine("No ha ingresado un numero, intente nuevamente");
@@ -108,10 +158,7 @@ namespace GrupoH.TP4
                         break;
                 }
 
-
-                
-
-            } while (okSeguirEligiendoCursos == false);
+            } while (salir == false);
         }
 
         private static List<Materia> CrearOfertaPersonalizada()

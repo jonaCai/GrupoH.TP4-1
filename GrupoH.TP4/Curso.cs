@@ -8,5 +8,9 @@ namespace GrupoH.TP4
 {
     class Curso
     {
+        public int Codigo { get; internal set; }
+        public string Profesor { get; internal set; }
+        public string Horario { get; internal set; }
+        public string Catedra { get; internal set; }
     }
 }
