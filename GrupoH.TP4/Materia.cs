@@ -10,5 +10,21 @@ namespace GrupoH.TP4
     {
         public int Codigo { get; internal set; }
         public string Nombre { get; internal set; }
+        public Dictionary<int, Curso> Cursos { get; internal set; }
+
+        public bool ExisteCurso(int codCurso)
+        {
+            bool retorno = false;
+
+            foreach (var curso in Cursos)
+            {
+                if (curso.Value.Codigo == codCurso)
+                {
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
     }
 }
