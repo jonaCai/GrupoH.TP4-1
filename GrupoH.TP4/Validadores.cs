@@ -35,6 +35,7 @@ namespace GrupoH.TP4
 
             return opcionElegida;
         }
+
         public static int NumeroPositivo(string textoAImprimir)
         {
             int numero;
@@ -52,8 +53,7 @@ namespace GrupoH.TP4
                 {
                     if (numero < 0)
                     {
-                        Console.WriteLine("El número ingresado debe ser positivo. Intente nuevamente...");
-                        break;
+                        Console.WriteLine("El número ingresado debe ser positivo. Intente nuevamente...");                        
                     }
                     else
                     {
