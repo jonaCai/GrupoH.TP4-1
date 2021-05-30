@@ -9,7 +9,7 @@ namespace GrupoH.TP4
 {
     class Carrera
     {
-        static public List<Carrera> PlanDeEstudios;
+        static public List<Carrera> PlanDeEstudios = new List<Carrera>();
         public string Codigo { get; internal set; }
         public string Nombre { get; internal set; }
         public List<Materia> Materias { get; internal set; }
