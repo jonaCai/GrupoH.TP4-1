@@ -27,33 +27,16 @@ namespace GrupoH.TP4
         public SolicitudDeInscripcion()
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
-            bool okUltimasCuatro = false;
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
 
             Alumno.UltimaCursada();
 
-
-            do
+            if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
             {
-                Console.WriteLine("Ultimas 4 materias? S o N");
-                if (Console.ReadLine().ToUpper() == "S")
-                {
-                    UltimasCuatro = true;
-                    okUltimasCuatro = true;
-                }
-                else if (Console.ReadLine().ToUpper() == "N")
-                {
-                    UltimasCuatro = false;
-                    okUltimasCuatro = true;
-                }
-                else
-                {
-                    Console.WriteLine("La opcion no es valida, debe ingresar S o N.");
-                    Console.ReadKey();
-                }
-            } while (okUltimasCuatro == false);
+                UltimasCuatro = true;
+            }
 
             Oferta = CrearOfertaPersonalizada();
             
@@ -83,6 +66,7 @@ namespace GrupoH.TP4
                                 seguirEligiendoMaterias = false;
                                 break;
                             }
+
                             Console.WriteLine("Ingrese el codigo de la materia a la que desee inscribirse:");
                             materiaElegida = int.Parse(Console.ReadLine());
 
@@ -91,6 +75,7 @@ namespace GrupoH.TP4
                                 if (materia.Codigo == materiaElegida)
                                 {
                                     Console.WriteLine($"\tCursos disponibles para {materia.Nombre}");
+
                                     foreach (var curso in materia.Cursos)
                                     {
                                         Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
@@ -101,6 +86,7 @@ namespace GrupoH.TP4
                                     {
                                         Console.WriteLine("Elija un curso principal");
                                         cursoElegido = int.Parse(Console.ReadLine());
+
                                         if (materia.Cursos.ContainsKey(cursoElegido))
                                         { 
                                             CursosPrincipales.Add(materia.Cursos[cursoElegido]);
@@ -117,6 +103,7 @@ namespace GrupoH.TP4
                                     {
                                         Console.WriteLine("Elija un curso alternativo");
                                         alternativaElegida = int.Parse(Console.ReadLine());
+
                                         if (materia.Cursos.ContainsKey(alternativaElegida))
                                         {
                                             CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
@@ -129,17 +116,10 @@ namespace GrupoH.TP4
                                         }
                                     } while (true);
 
-                                    Console.WriteLine("Desea agregar otra materia? S o N (Maximo 4)");
-
-                                    //                              //
-                                    //                              //
-                                    //  ------A DESARROLLAR------   //
-                                    //  Desarrollar S o N para      //
-                                    //  continuar agregando mat.    //
-                                    //                              //
-                                    //                              //
-
-
+                                    if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
+                                    {
+                                        break;
+                                    }
                                 }
                             }
 
@@ -148,8 +128,8 @@ namespace GrupoH.TP4
                         } while (seguirEligiendoMaterias == true);                        
                         break;
                     case 9:
-                        Console.WriteLine("Saliendo...");
                         salir = true;
+                        Console.WriteLine("Saliendo...");
                         Console.ReadKey();
                         break;
                     default:
