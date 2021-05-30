@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>GrupoH.TP4</RootNamespace>
     <AssemblyName>GrupoH.TP4</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,7 @@
     <Compile Include="Catedra.cs" />
     <Compile Include="Curso.cs" />
     <Compile Include="Materia.cs" />
+    <Compile Include="OfertaAcademica.cs" />
     <Compile Include="Profesor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

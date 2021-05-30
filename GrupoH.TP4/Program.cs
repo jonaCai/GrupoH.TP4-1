@@ -10,13 +10,22 @@ namespace GrupoH.TP4
     {
         static void Main(string[] args)
         {
+            int codigo_materia;
+
+
+            Console.Write("Codigo de la materia?:");
+            codigo_materia = int.Parse(Console.ReadLine());
+            OfertaAcademica.CargarOferta();
+            OfertaAcademica.MostrarOfertaCursos(codigo_materia);
+            Console.ReadLine();
+            /*
             const string menuPrincipal = "Sistema de Inscripciones.";
             //const string declaracionJurada = "Ingrese ";
             int registro;
             bool registroValido = false;
             string opcionElegida;
 
-            while (registroValido = false)
+            while (registroValido == false)
             {
                 Console.WriteLine("Ingrese su Numero de Registro:");
                 int.TryParse(Console.ReadLine(), out registro);
@@ -43,6 +52,8 @@ namespace GrupoH.TP4
 
 
             SolicitudDeInscripcion.DeclaracionJurada();
+
+            */
         }
     }
 }

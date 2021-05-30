@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrupoH.TP4
 {
-    class SolicitudDeInscripcion
+    public class SolicitudDeInscripcion
     {
         int Codigo;
         int RegistroAlumno;
@@ -17,34 +17,25 @@ namespace GrupoH.TP4
         List<Curso> CursosAlternativos;
 
 
+
         internal static bool DeclaracionJurada()
         {
             throw new NotImplementedException();
         }
 
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
-        // Solo se le pasa el Nº de Registro y si es Segundo LLamado
-        // como parametros al invocarlo.
-        public SolicitudDeInscripcion(int registro, bool segundoLLamado)
+        public SolicitudDeInscripcion()
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
-            var aleatorio = new Random();
 
-            Codigo = aleatorio.Next(0, 999999);
-            RegistroAlumno = registro;
-            SegundoLlamado = segundoLLamado;
             Alumno.UltimaCursada();
 
             if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
             {
                 UltimasCuatro = true;
-            }
-            else
-            {
-                UltimasCuatro = false;
             }
 
             Oferta = CrearOfertaPersonalizada();
@@ -76,7 +67,8 @@ namespace GrupoH.TP4
                                 break;
                             }
 
-                            materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desee inscribirse:");
+                            Console.WriteLine("Ingrese el codigo de la materia a la que desea inscribirse:");
+                            materiaElegida = int.Parse(Console.ReadLine());
 
                             foreach (var materia in Oferta)
                             {
@@ -86,13 +78,14 @@ namespace GrupoH.TP4
 
                                     foreach (var curso in materia.Cursos)
                                     {
-                                        Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
-
+                                        //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
+                                        OfertaAcademica.MostrarCursosxMateria(materia);
                                     }
 
                                     do
                                     {
-                                        cursoElegido = Validadores.NumeroPositivo("Elija un curso principal:");
+                                        Console.WriteLine("Elija un curso principal");
+                                        cursoElegido = int.Parse(Console.ReadLine());
 
                                         if (materia.Cursos.ContainsKey(cursoElegido))
                                         { 
@@ -108,7 +101,8 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
+                                        Console.WriteLine("Elija un curso alternativo");
+                                        alternativaElegida = int.Parse(Console.ReadLine());
 
                                         if (materia.Cursos.ContainsKey(alternativaElegida))
                                         {
@@ -122,9 +116,8 @@ namespace GrupoH.TP4
                                         }
                                     } while (true);
 
-                                    if (Validadores.SoN("Desea agregar otra materia (Maximo 4)? S o N ") == "N")
+                                    if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
                                     {
-                                        seguirEligiendoMaterias = false;
                                         break;
                                     }
                                 }
@@ -148,11 +141,12 @@ namespace GrupoH.TP4
             } while (salir == false);
         }
 
+
         private static List<Materia> CrearOfertaPersonalizada()
         {
             List<Materia> retorno = new List<Materia>();
             int opcionElegida;
-            string carreraElegida;
+            string carreraElegida="";
             bool ok = false;
 
             do
@@ -192,15 +186,18 @@ namespace GrupoH.TP4
                         Console.ReadKey();
                         break;
                 }
+
+
+
             } while (ok == false);
 
-
+            Console.WriteLine("La carrera elegida fue: "+ carreraElegida);
             //                              //
             //                              //
             //  ------A DESARROLLAR------   //
             //                              //
             //                              //
-
+            
             return retorno;
         }
     }
