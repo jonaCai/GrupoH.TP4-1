@@ -9,8 +9,8 @@ namespace GrupoH.TP4
 {
     class OfertaAcademica
     {
-        static Dictionary<int, Materia> OfertaMateria = new Dictionary<int, Materia>();
-        static Dictionary<int, Curso> OfertaCursos = new Dictionary<int, Curso>();
+        public static Dictionary<int, Materia> OfertaMateria = new Dictionary<int, Materia>();
+        public static Dictionary<int, Curso> OfertaCursos = new Dictionary<int, Curso>();
 
         static string nombreArchivo = "Oferta.txt";
 
