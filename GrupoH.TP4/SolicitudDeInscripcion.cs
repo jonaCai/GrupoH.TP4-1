@@ -23,7 +23,7 @@ namespace GrupoH.TP4
         }
 
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
-        public SolicitudDeInscripcion()
+        public SolicitudDeInscripcion(int registro, bool segundoLLamado)
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool seguirEligiendoMaterias = true;
@@ -32,6 +32,8 @@ namespace GrupoH.TP4
             var aleatorio = new Random();
 
             Codigo = aleatorio.Next(0, 999999);
+            RegistroAlumno = registro;
+            SegundoLlamado = segundoLLamado;
             Alumno.UltimaCursada();
 
             if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
@@ -72,8 +74,7 @@ namespace GrupoH.TP4
                                 break;
                             }
 
-                            Console.WriteLine("Ingrese el codigo de la materia a la que desee inscribirse:");
-                            materiaElegida = int.Parse(Console.ReadLine());
+                            materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desee inscribirse:");
 
                             foreach (var materia in Oferta)
                             {
@@ -89,8 +90,7 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        Console.WriteLine("Elija un curso principal");
-                                        cursoElegido = int.Parse(Console.ReadLine());
+                                        cursoElegido = Validadores.NumeroPositivo("Elija un curso principal:");
 
                                         if (materia.Cursos.ContainsKey(cursoElegido))
                                         { 
@@ -106,8 +106,7 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        Console.WriteLine("Elija un curso alternativo");
-                                        alternativaElegida = int.Parse(Console.ReadLine());
+                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
 
                                         if (materia.Cursos.ContainsKey(alternativaElegida))
                                         {
