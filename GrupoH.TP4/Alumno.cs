@@ -13,10 +13,10 @@ namespace GrupoH.TP4
         public int Dni { get; internal set; }
         public string Mail { get; internal set; }
         public List<Carrera> Carreras { get; internal set; }
-        public Dictionary<int,int> MateriasAprobadas { get; internal set; }     // KEY --> Codigo de la Materia | VALUE --> Nota
+        public List<Materia> MateriasAprobadas { get; internal set; }
         public List<Materia> MateriasRegularizadas { get; internal set; }
 
-        public Alumno(int registro, string nombre, int dni, string mail, List<Carrera> carreras, Dictionary<int,int> matAprobadas, List<Materia> matRegularizadas)
+        public Alumno(int registro, string nombre, int dni, string mail, List<Carrera> carreras, List<Materia> matAprobadas, List<Materia> matRegularizadas)
         {
             this.NroRegistro = registro;
             this.Nombre = nombre;
@@ -38,7 +38,7 @@ namespace GrupoH.TP4
 
             foreach (var materia in MateriasAprobadas)
             {
-                retorno.Add(materia.Key);
+                retorno.Add(materia.Codigo);
             }
 
             return retorno;
