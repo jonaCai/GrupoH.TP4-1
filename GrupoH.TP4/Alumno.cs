@@ -32,7 +32,7 @@ namespace GrupoH.TP4
             throw new NotImplementedException();
         }
 
-        internal List<int> ObtenerMateriasAprobadas()
+        public List<int> ObtenerMateriasAprobadas()
         {
             List<int> retorno = new List<int>();
 
@@ -44,7 +44,7 @@ namespace GrupoH.TP4
             return retorno;
         }
 
-        internal List<int> ObtenerMateriasRegularizadas()
+        public List<int> ObtenerMateriasRegularizadas()
         {
             List<int> retorno = new List<int>();
 
