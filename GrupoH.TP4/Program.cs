@@ -12,11 +12,14 @@ namespace GrupoH.TP4
         {
             int codigo_materia;
 
-
-            Console.Write("Codigo de la materia?:");
-            codigo_materia = int.Parse(Console.ReadLine());
             OfertaAcademica.CargarOferta();
+            NominaAlumnos.CargarNomina();
+            Carrera.CargarPlanesDeEstudios();
+            Console.Write("Codigo de la materia?:");
+            codigo_materia = int.Parse(Console.ReadLine());            
             OfertaAcademica.MostrarOfertaCursos(codigo_materia);
+
+            
             Console.ReadLine();
             /*
             const string menuPrincipal = "Sistema de Inscripciones.";
