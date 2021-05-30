@@ -33,21 +33,32 @@ namespace GrupoH.TP4
 
                         foreach (var j in carrerasImportadas)
                         {
-                            carreraAlumno.Add(Carrera.PlanDeEstudios.Find(x => x.Codigo == j));
+                            if (j != "")
+                            {
+                                carreraAlumno.Add(Carrera.PlanDeEstudios.Find(x => x.Codigo == j));
+                            }                            
                         }
 
                         foreach (var i in materiasImportadas)
                         {
                             int codigo;
                             int.TryParse(i, out codigo);
-                            materiasAprobadas.Add(OfertaAcademica.OfertaMateria[codigo]);
+
+                            if (i != "")
+                            {
+                                materiasAprobadas.Add(OfertaAcademica.OfertaMateria[codigo]);
+                            }                            
                         }
 
                         foreach (var k in materiasImportadas2)
                         {
                             int codigo;
                             int.TryParse(k, out codigo);
-                            materiasRegularizadas.Add(OfertaAcademica.OfertaMateria[codigo]);
+
+                            if (k != "")
+                            {
+                                materiasRegularizadas.Add(OfertaAcademica.OfertaMateria[codigo]);
+                            }                            
                         }
 
                         var alumnoImportado = new Alumno(numeroReg, linea[1], linea[2], carreraAlumno, materiasAprobadas, materiasRegularizadas);
