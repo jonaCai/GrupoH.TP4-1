@@ -14,6 +14,7 @@ namespace GrupoH.TP4
         public List<Carrera> Carreras { get; internal set; }
         public List<Materia> MateriasAprobadas { get; internal set; }
         public List<Materia> MateriasRegularizadas { get; internal set; }
+        public Dictionary<int,MateriasAlumno> MateriasCursadas = new Dictionary<int, MateriasAlumno>();
 
         public Alumno(int registro, string nombre, string mail, List<Carrera> carreras, List<Materia> matAprobadas, List<Materia> matRegularizadas)
         {
@@ -57,6 +58,8 @@ namespace GrupoH.TP4
         // Recorre Alumnno/Materia y clasifica las materias del ultimo cuatrimestre en Alumno.MateriasAprobadas o Alumno.MateriasRegularizadas.
         internal static void UltimaCursada()
         {
+
+
             throw new NotImplementedException();
         }
     }
