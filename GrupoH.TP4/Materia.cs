@@ -15,7 +15,7 @@ namespace GrupoH.TP4
         public string Departamento { get; set; }
         public int Codigo { get;  set; }
         public string Nombre { get; set; }
-        public Dictionary<int, Curso> Cursos { get;  set; }
+        public Dictionary<int, Curso> Cursos = new Dictionary<int, Curso>();
         
         
 

@@ -167,6 +167,14 @@ namespace GrupoH.TP4
                                 var curso = new Curso(Sede, Catedra, claveCurso, Dia_hora, profesor,Codigo_materia);
 
                                 OfertaCursos.Add(claveCurso, curso);
+
+                                foreach (var materia in OfertaMateria)
+                                {
+                                    if (curso.cod_materia == materia.Key)
+                                    {
+                                        OfertaMateria[materia.Key].Cursos.Add(claveCurso, curso);
+                                    }
+                                }
                             }
 
 
