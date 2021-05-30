@@ -49,6 +49,7 @@
     <Compile Include="Catedra.cs" />
     <Compile Include="Curso.cs" />
     <Compile Include="Materia.cs" />
+    <Compile Include="NominaAlumnos.cs" />
     <Compile Include="OfertaAcademica.cs" />
     <Compile Include="Profesor.cs" />
     <Compile Include="Program.cs" />
