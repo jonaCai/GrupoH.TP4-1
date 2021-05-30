@@ -17,12 +17,6 @@ namespace GrupoH.TP4
         List<Curso> CursosAlternativos;
 
 
-
-        internal static bool DeclaracionJurada()
-        {
-            throw new NotImplementedException();
-        }
-
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
         public SolicitudDeInscripcion()
         {
@@ -35,11 +29,11 @@ namespace GrupoH.TP4
 
             if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
             {
-                UltimasCuatro = true;
+                this.UltimasCuatro = true;
             }
             else
             {
-                UltimasCuatro = false;
+                this.UltimasCuatro = false;
             }
 
             Oferta = CrearOfertaPersonalizada();
