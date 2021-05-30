@@ -37,6 +37,10 @@ namespace GrupoH.TP4
             {
                 UltimasCuatro = true;
             }
+            else
+            {
+                UltimasCuatro = false;
+            }
 
             Oferta = CrearOfertaPersonalizada();
             
@@ -67,8 +71,7 @@ namespace GrupoH.TP4
                                 break;
                             }
 
-                            Console.WriteLine("Ingrese el codigo de la materia a la que desea inscribirse:");
-                            materiaElegida = int.Parse(Console.ReadLine());
+                            materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse:");
 
                             foreach (var materia in Oferta)
                             {
@@ -84,8 +87,7 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        Console.WriteLine("Elija un curso principal");
-                                        cursoElegido = int.Parse(Console.ReadLine());
+                                        cursoElegido = Validadores.NumeroPositivo("Elija un curso principal:");
 
                                         if (materia.Cursos.ContainsKey(cursoElegido))
                                         { 
@@ -101,8 +103,7 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        Console.WriteLine("Elija un curso alternativo");
-                                        alternativaElegida = int.Parse(Console.ReadLine());
+                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
 
                                         if (materia.Cursos.ContainsKey(alternativaElegida))
                                         {
