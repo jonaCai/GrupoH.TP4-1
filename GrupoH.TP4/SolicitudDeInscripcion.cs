@@ -23,6 +23,8 @@ namespace GrupoH.TP4
         }
 
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
+        // Solo se le pasa el Nº de Registro y si es Segundo LLamado
+        // como parametros al invocarlo.
         public SolicitudDeInscripcion(int registro, bool segundoLLamado)
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";

@@ -35,6 +35,7 @@ namespace GrupoH.TP4
 
             return opcionElegida;
         }
+
         public static int NumeroPositivo(string textoAImprimir)
         {
             int numero;
