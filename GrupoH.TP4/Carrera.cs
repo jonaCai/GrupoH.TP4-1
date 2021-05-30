@@ -22,7 +22,7 @@ namespace GrupoH.TP4
             this.Materias = materias;
         }
 
-        static void CargarPlanesDeEstudios()
+        static public void CargarPlanesDeEstudios()
         {
             if (File.Exists(nombreArchivo))
             {
