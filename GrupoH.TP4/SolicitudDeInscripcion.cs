@@ -17,7 +17,6 @@ namespace GrupoH.TP4
         List<Curso> CursosAlternativos;
 
 
-
         internal static bool DeclaracionJurada()
         {
             throw new NotImplementedException();
@@ -30,12 +29,18 @@ namespace GrupoH.TP4
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
+            var aleatorio = new Random();
 
+            Codigo = aleatorio.Next(0, 999999);
             Alumno.UltimaCursada();
 
             if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
             {
                 UltimasCuatro = true;
+            }
+            else
+            {
+                UltimasCuatro = false;
             }
 
             Oferta = CrearOfertaPersonalizada();
@@ -116,8 +121,9 @@ namespace GrupoH.TP4
                                         }
                                     } while (true);
 
-                                    if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
+                                    if (Validadores.SoN("Desea agregar otra materia (Maximo 4)? S o N ") == "N")
                                     {
+                                        seguirEligiendoMaterias = false;
                                         break;
                                     }
                                 }
