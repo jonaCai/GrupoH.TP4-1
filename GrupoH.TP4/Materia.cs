@@ -10,6 +10,10 @@ namespace GrupoH.TP4
     {
         public int Codigo { get; internal set; }
         public string Nombre { get; internal set; }
+        public int CargaHoraria { get; internal set; }
+        public string Departamento { get; internal set; }
+        public List<Materia> Correlativas { get; internal set; }
+        public List<Carrera> Carreras { get; internal set; }
         public Dictionary<int, Curso> Cursos { get; internal set; }
 
         public bool ExisteCurso(int codCurso)
