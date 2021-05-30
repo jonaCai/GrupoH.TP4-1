@@ -10,17 +10,15 @@ namespace GrupoH.TP4
     {
         public int NroRegistro { get; internal set; }
         public string Nombre { get; internal set; }
-        public int Dni { get; internal set; }
         public string Mail { get; internal set; }
         public List<Carrera> Carreras { get; internal set; }
         public List<Materia> MateriasAprobadas { get; internal set; }
         public List<Materia> MateriasRegularizadas { get; internal set; }
 
-        public Alumno(int registro, string nombre, int dni, string mail, List<Carrera> carreras, List<Materia> matAprobadas, List<Materia> matRegularizadas)
+        public Alumno(int registro, string nombre, string mail, List<Carrera> carreras, List<Materia> matAprobadas, List<Materia> matRegularizadas)
         {
             this.NroRegistro = registro;
             this.Nombre = nombre;
-            this.Dni = dni;
             this.Mail = mail;
             this.Carreras = carreras;
             this.MateriasAprobadas = matAprobadas;
