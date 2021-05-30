@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GrupoH.TP4
 {
-    class SolicitudDeInscripcion
+    public class SolicitudDeInscripcion
     {
         int Codigo;
         int RegistroAlumno;
@@ -67,7 +67,7 @@ namespace GrupoH.TP4
                                 break;
                             }
 
-                            Console.WriteLine("Ingrese el codigo de la materia a la que desee inscribirse:");
+                            Console.WriteLine("Ingrese el codigo de la materia a la que desea inscribirse:");
                             materiaElegida = int.Parse(Console.ReadLine());
 
                             foreach (var materia in Oferta)
@@ -78,8 +78,8 @@ namespace GrupoH.TP4
 
                                     foreach (var curso in materia.Cursos)
                                     {
-                                        Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
-
+                                        //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
+                                        OfertaAcademica.MostrarCursosxMateria(materia);
                                     }
 
                                     do
@@ -141,11 +141,12 @@ namespace GrupoH.TP4
             } while (salir == false);
         }
 
+
         private static List<Materia> CrearOfertaPersonalizada()
         {
             List<Materia> retorno = new List<Materia>();
             int opcionElegida;
-            string carreraElegida;
+            string carreraElegida="";
             bool ok = false;
 
             do
@@ -185,15 +186,18 @@ namespace GrupoH.TP4
                         Console.ReadKey();
                         break;
                 }
+
+
+
             } while (ok == false);
 
-
+            Console.WriteLine("La carrera elegida fue: "+ carreraElegida);
             //                              //
             //                              //
             //  ------A DESARROLLAR------   //
             //                              //
             //                              //
-
+            
             return retorno;
         }
     }

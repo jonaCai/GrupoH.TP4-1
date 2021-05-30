@@ -8,9 +8,28 @@ namespace GrupoH.TP4
 {
     class Materia
     {
-        public int Codigo { get; internal set; }
-        public string Nombre { get; internal set; }
-        public Dictionary<int, Curso> Cursos { get; internal set; }
+        
+
+        
+
+        public string Departamento { get; set; }
+        public int Codigo { get;  set; }
+        public string Nombre { get; set; }
+        public Dictionary<int, Curso> Cursos { get;  set; }
+        
+        
+
+        
+
+        public Materia(string departamento, string nombre_materia, int codigo_materia)
+        {
+            Departamento = departamento;
+            this.Nombre = nombre_materia;
+            this.Codigo = codigo_materia;
+
+           
+        }
+
 
         public bool ExisteCurso(int codCurso)
         {
