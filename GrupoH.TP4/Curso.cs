@@ -12,12 +12,12 @@ namespace GrupoH.TP4
 
         
 
-        public int Codigo { get;  set; }
-        public string Profesor { get;  set; }
-        public string DiaHorario { get; set; }
-        public string Catedra { get;  set; }
-        public string Sede { get; set; }
-        public int cod_materia { get; set; }
+        public int Codigo { get; }
+        public string Profesor { get; }
+        public string DiaHorario { get; }
+        public string Catedra { get; }
+        public string Sede { get; }
+        public int cod_materia { get; }
 
         public Curso(string sede, string catedra, int num_curso, string dia_hora, string profesor, int codigo_materia)
         {
