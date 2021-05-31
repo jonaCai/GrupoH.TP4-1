@@ -16,15 +16,15 @@ namespace GrupoH.TP4
             NominaAlumnos.CargarNomina();
             Carrera.CargarPlanesDeEstudios();
             Console.Write("Codigo de la materia?:");
-            codigo_materia = int.Parse(Console.ReadLine());            
-            OfertaAcademica.MostrarOfertaCursos(codigo_materia);
+            /*codigo_materia = int.Parse(Console.ReadLine());            
+            OfertaAcademica.MostrarOfertaCursos(codigo_materia);*/
 
             
             Console.ReadLine();
-            /*
-            const string menuPrincipal = "Sistema de Inscripciones.";
+            
+            const string menuPrincipal = "\tSistema de Inscripciones.";
             //const string declaracionJurada = "Ingrese ";
-            int registro;
+            int registro = 0;
             bool registroValido = false;
             string opcionElegida;
 
@@ -33,7 +33,7 @@ namespace GrupoH.TP4
                 Console.WriteLine("Ingrese su Numero de Registro:");
                 int.TryParse(Console.ReadLine(), out registro);
 
-                if (!Alumno.Existe(registro))
+                if (!NominaAlumnos.Inscriptos.ContainsKey(registro))
                 {
                     Console.WriteLine("No existe un alumno con ese numero de registro.");
                     Console.ReadKey();
@@ -44,19 +44,18 @@ namespace GrupoH.TP4
                 }
             }
 
-            Console.WriteLine($"Bienvenido {}!");
+            Console.WriteLine($"Bienvenido {NominaAlumnos.Inscriptos[registro].Nombre}!");
             
 
             do
             {
                 Console.WriteLine(menuPrincipal);
+                new SolicitudDeInscripcion(registro);
 
             } while (true);
 
 
-            SolicitudDeInscripcion.DeclaracionJurada();
-
-            */
+            //SolicitudDeInscripcion.DeclaracionJurada();            
         }
     }
 }

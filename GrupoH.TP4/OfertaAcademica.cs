@@ -14,8 +14,6 @@ namespace GrupoH.TP4
 
         static string nombreArchivo = "Oferta.txt";
 
-
-
         public static void CargarOferta()
         {
             string Departamento = "";
@@ -92,24 +90,18 @@ namespace GrupoH.TP4
                                 {   
                                     linea = linea.Remove(linea.IndexOf('('),17);
                                    
-                                };
-
-                                
+                                }                                
 
                                 string m;
 
                                 var datos = linea.Remove(linea.IndexOf(")"));
                                 var data = datos.Split('(');
                                 
-                                Nombre_materia = data[0].Trim();
-                                
+                                Nombre_materia = data[0].Trim();                                
                                 
                                 m = data[1].ToString();
                                 
                                 Codigo_materia = int.Parse(m);
-
-
-                                //
 
                                 var materia = new Materia(Departamento, Nombre_materia, Codigo_materia);
 
@@ -153,7 +145,6 @@ namespace GrupoH.TP4
 
                             }
 
-
                             string ñ = linea.Substring(0, 4).ToString();
 
                             if (int.TryParse(ñ, out Num_curso))
@@ -177,36 +168,30 @@ namespace GrupoH.TP4
                                 }
                             }
 
-
-
-
-
-
-                            //
-
-
-
-                        }else if (linea.Contains("Virtual")) {  reader.ReadLine(); }
-
-
+                        }
+                        else if (linea.Contains("Virtual")) 
+                        {
+                            reader.ReadLine();
+                        }
                     }
-
                 }
 
             }else { Console.WriteLine("El archivo no existe"); }
 
         }
 
-        internal static void MostrarCursosxMateria(Materia materia)
+        internal static void MostrarCursosxMateria(int materia)
         {
-            throw new NotImplementedException();
+            foreach (var cursoDisponible in OfertaMateria[materia].Cursos)
+            {
+                Console.WriteLine($"{cursoDisponible.Key} - {cursoDisponible.Value.Profesor} {cursoDisponible.Value.DiaHorario} | {cursoDisponible.Value.Catedra}");
+            }            
         }
 
         public static void MostrarOfertaMaterias()
         {
 
             Console.WriteLine("Oferta academica: ");
-
             
             Console.WriteLine("  Codigo Materia  |    Nombre Materia            |    Departamento ");
 
@@ -216,8 +201,6 @@ namespace GrupoH.TP4
                 string nombre = a.Value.Nombre;
                 string departamento = a.Value.Departamento;
 
-
-
                 if (nombre.Length > 18)
                 {
                     nombre = nombre.Substring(0, 17) + "...";
@@ -226,7 +209,6 @@ namespace GrupoH.TP4
                 string linea = codigo.PadRight(18) + nombre.PadLeft(18) + departamento.PadLeft(18);
 
                 Console.WriteLine(linea);
-
             }
             
         }
@@ -234,14 +216,9 @@ namespace GrupoH.TP4
         public static void MostrarOfertaCursos(int codigo_materia)
         {
 
-
-
-
             Console.WriteLine("Oferta cursos de la materia : "+OfertaMateria[codigo_materia].Nombre);
-
        
-            //Sede, Catedra, Num_curso, Dia_hora, profesor
-          
+            //Sede, Catedra, Num_curso, Dia_hora, profesor          
 
             foreach (var a in OfertaCursos)
             {
@@ -260,22 +237,10 @@ namespace GrupoH.TP4
                     Console.WriteLine("Numero de curso:" + Numero_c);
                     Console.WriteLine("dia/horario" + dia_horario);
                     Console.WriteLine("Profesor" + profesor);
-                    
-                    
-
                 }
-               
-
-                 //+ Numero_c.PadLeft(18)+ dia_horario.PadLeft(18) + profesor.PadLeft(18);
-
                 
+                 //+ Numero_c.PadLeft(18)+ dia_horario.PadLeft(18) + profesor.PadLeft(18);                
               }
-
-              
-
         }
-
-
-
     }
 }

@@ -13,8 +13,8 @@ namespace GrupoH.TP4
         List<Materia> Oferta;
         bool UltimasCuatro;
         bool SegundoLlamado;
-        List<Curso> CursosPrincipales;
-        List<Curso> CursosAlternativos;
+        List<Curso> CursosPrincipales = new List<Curso>();
+        List<Curso> CursosAlternativos = new List<Curso>();
 
 
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
@@ -31,13 +31,13 @@ namespace GrupoH.TP4
 
             foreach (var materia in ultimaCursada)
             {
-                if (Validadores.SoN($"Usted Aprobo {OfertaAcademica.OfertaMateria[materia].Nombre}?") == "S")
+                if (Validadores.SoN($"Usted Aprobo '{OfertaAcademica.OfertaMateria[materia].Nombre}'?") == "S")
                 {
                     NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Add(OfertaAcademica.OfertaMateria[materia]);
                 }
                 else
                 {
-                    if (Validadores.SoN($"Usted Regularizo {OfertaAcademica.OfertaMateria[materia].Nombre}?") == "S")
+                    if (Validadores.SoN($"Usted Regularizo '{OfertaAcademica.OfertaMateria[materia].Nombre}'?") == "S")
                     {
                         NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Add(OfertaAcademica.OfertaMateria[materia]);
                     }
@@ -53,7 +53,7 @@ namespace GrupoH.TP4
                 this.UltimasCuatro = false;
             }
 
-            Oferta = CrearOfertaPersonalizada();
+            Oferta = CrearOfertaPersonalizada(registro);
             
             do
             {
@@ -93,7 +93,7 @@ namespace GrupoH.TP4
                                     foreach (var curso in materia.Cursos)
                                     {
                                         //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
-                                        OfertaAcademica.MostrarCursosxMateria(materia);
+                                        OfertaAcademica.MostrarCursosxMateria(materia.Codigo);
                                     }
 
                                     do
@@ -154,7 +154,7 @@ namespace GrupoH.TP4
         }
 
 
-        private static List<Materia> CrearOfertaPersonalizada()
+        private static List<Materia> CrearOfertaPersonalizada(int registro)
         {
             List<Materia> retorno = new List<Materia>();
             int opcionElegida;
@@ -174,27 +174,30 @@ namespace GrupoH.TP4
                 switch (opcionElegida)
                 {
                     case 1:
-                        carreraElegida = "CONTADOR";
+                        carreraElegida = "CP";
                         ok = true;
                         break;
                     case 2:
-                        carreraElegida = "ADMIN";
+                        carreraElegida = "LA";
                         ok = true;
                         break;
                     case 3:
-                        carreraElegida = "SISTEMAS";
+                        carreraElegida = "LS";
                         ok = true;
                         break;
                     case 4:
-                        carreraElegida = "ECONOMIA"; 
+                        carreraElegida = "LE"; 
                         ok = true;
                         break;
                     case 5:
-                        carreraElegida = "ACTUARIO";
+                        carreraElegida = "ACA";
                         ok = true;
                         break;
+                    case 6:
+                        carreraElegida = "ACE";
+                        break;
                     default:
-                        Console.WriteLine("La opcion ingresada no es valida, ingrese un numero entre 1 y 5.");
+                        Console.WriteLine("La opcion ingresada no es valida, ingrese un numero entre 1 y 6.");
                         Console.ReadKey();
                         break;
                 }
@@ -203,12 +206,27 @@ namespace GrupoH.TP4
 
             } while (ok == false);
 
-            Console.WriteLine("La carrera elegida fue: "+ carreraElegida);
-            //                              //
-            //                              //
-            //  ------A DESARROLLAR------   //
-            //                              //
-            //                              //
+            var carrera = Carrera.PlanDeEstudios.Find(x => x.Codigo == carreraElegida);
+            Console.WriteLine($"La carrera elegida fue: {carrera.Nombre}");
+
+            foreach (var materia in carrera.Materias)
+            {
+                if (!NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Contains(materia))
+                {
+                    if (!NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Contains(materia))
+                    {
+                        retorno.Add(materia);
+                    }
+                    else
+                    {
+                        continue;
+                    }                    
+                }
+                else
+                {
+                    continue;
+                }
+            }
             
             return retorno;
         }
