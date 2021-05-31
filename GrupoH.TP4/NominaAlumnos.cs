@@ -9,7 +9,7 @@ namespace GrupoH.TP4
 {
     class NominaAlumnos
     {
-        static Dictionary<int, Alumno> Inscriptos = new Dictionary<int, Alumno>();
+        static public Dictionary<int, Alumno> Inscriptos = new Dictionary<int, Alumno>();
 
         static string nombreArchivo = "Alumnos.txt";
 

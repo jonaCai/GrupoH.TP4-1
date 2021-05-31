@@ -56,7 +56,7 @@ namespace GrupoH.TP4
         }
 
         // Recorre Alumnno/Materia y clasifica las materias del ultimo cuatrimestre en Alumno.MateriasAprobadas o Alumno.MateriasRegularizadas.
-        internal static void UltimaCursada()
+        internal static List<int> UltimaCursada()
         {
             List<int> retorno = new List<int>();
 
@@ -73,12 +73,14 @@ namespace GrupoH.TP4
                 }
                 else
                 {
-
+                    if (timeSpan.TotalDays <= 5*30)
+                    {
+                        retorno.Add(materia.Value.CodigoMateria);
+                    }
                 }
-
             }
 
-            throw new NotImplementedException();
+            return retorno;
         }
     }
 }

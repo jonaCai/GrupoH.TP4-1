@@ -18,14 +18,31 @@ namespace GrupoH.TP4
 
 
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
-        public SolicitudDeInscripcion()
+        public SolicitudDeInscripcion(int registro)
         {
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
+            List<int> ultimaCursada = new List<int>();
+            this.RegistroAlumno = registro;
 
-            Alumno.UltimaCursada();
+            ultimaCursada = Alumno.UltimaCursada();
+
+            foreach (var materia in ultimaCursada)
+            {
+                if (Validadores.SoN($"Usted Aprobo {OfertaAcademica.OfertaMateria[materia].Nombre}?") == "S")
+                {
+                    NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Add(OfertaAcademica.OfertaMateria[materia]);
+                }
+                else
+                {
+                    if (Validadores.SoN($"Usted Regularizo {OfertaAcademica.OfertaMateria[materia].Nombre}?") == "S")
+                    {
+                        NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Add(OfertaAcademica.OfertaMateria[materia]);
+                    }
+                }
+            }
 
             if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
             {
