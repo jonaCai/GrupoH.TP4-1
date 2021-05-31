@@ -56,28 +56,34 @@ namespace GrupoH.TP4
         }
 
         // Recorre Alumnno/Materia y clasifica las materias del ultimo cuatrimestre en Alumno.MateriasAprobadas o Alumno.MateriasRegularizadas.
-        internal static List<int> UltimaCursada()
+        internal static List<int> UltimaCursada(int registro)
         {
             List<int> retorno = new List<int>();
             
             foreach (var materia in NominaAlumnos.MateriasCursadas)
             {                
-                TimeSpan timeSpan = DateTime.Now - materia.Value.FechaDeCursada;
 
-                if (DateTime.Now.Month <= 6)
+                if (materia.Key.Contains(registro.ToString()))
                 {
-                    if (timeSpan.TotalDays <= 4*30)
+                    TimeSpan timeSpan = DateTime.Now - materia.Value.FechaDeCursada;
+
+                    if (DateTime.Now.Month <= 6)
                     {
-                        retorno.Add(materia.Value.CodigoMateria);
+                        if (timeSpan.Days <= 11 * 30)
+                        {
+                            retorno.Add(materia.Value.CodigoMateria);
+                        }
                     }
-                }
-                else
-                {
-                    if (timeSpan.TotalDays <= 5*30)
+                    else
                     {
-                        retorno.Add(materia.Value.CodigoMateria);
+                        if (timeSpan.TotalDays <= 7 * 30)
+                        {
+                            retorno.Add(materia.Value.CodigoMateria);
+                        }
                     }
+
                 }
+                
             }
 
             return retorno;

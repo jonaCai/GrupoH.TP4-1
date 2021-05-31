@@ -9,8 +9,9 @@ namespace GrupoH.TP4
 {
     class NominaAlumnos
     {
+        
         static public Dictionary<int, Alumno> Inscriptos = new Dictionary<int, Alumno>();
-        public static Dictionary<int, MateriasAlumno> MateriasCursadas = new Dictionary<int, MateriasAlumno>();
+        public static Dictionary<string, MateriasAlumno> MateriasCursadas = new Dictionary<string, MateriasAlumno>();
         static string nombreArchivo = "Alumnos.txt";
 
         public static void CargarNomina()
@@ -23,6 +24,7 @@ namespace GrupoH.TP4
                     {
                         List<Materia> materiasAprobadas = new List<Materia>();
                         List<Materia> materiasRegularizadas = new List<Materia>();
+                        List<Materia> totalmaterias = new List<Materia>();
                         List<Carrera> carreraAlumno = new List<Carrera>();
 
                         var linea = reader.ReadLine().Split('|');
@@ -65,29 +67,28 @@ namespace GrupoH.TP4
                             }                            
                         }
 
+                        totalmaterias.AddRange(materiasAprobadas);
+                        totalmaterias.AddRange(materiasRegularizadas);
+
                         var alumnoImportado = new Alumno(numeroReg, linea[1], linea[2], carreraAlumno, materiasAprobadas, materiasRegularizadas);
 
                         Inscriptos.Add(alumnoImportado.NroRegistro, alumnoImportado);
 
                         int contador = 0;
-                        foreach (var i in materiasAprobadas)
+                        foreach (var i in totalmaterias)
                         {
-                            var matAlumno = new MateriasAlumno(DateTime.Parse(fecha_inscripto[contador]),int.Parse(notas[contador]),i.Codigo);
+                            var matAlumno = new MateriasAlumno(numeroReg,DateTime.Parse(fecha_inscripto[contador]),int.Parse(notas[contador]),i.Codigo);
 
+                            var keymaAlumno = alumnoImportado.NroRegistro.ToString()+ i.Codigo.ToString();
 
-                            contador = +1;
+                            MateriasCursadas.Add(keymaAlumno, matAlumno);
+                            //validaciones para fecha y notas?
+                            contador =contador +1;
                                 
                         }
-                        foreach(var i in materiasRegularizadas)
-                        {
-                            var matAlumno = new MateriasAlumno(DateTime.Parse(fecha_inscripto[contador]), int.Parse(notas[contador]), i.Codigo);
+                     
 
 
-                            contador = +1;
-
-
-                        }
-                        
 
                     }
                 }

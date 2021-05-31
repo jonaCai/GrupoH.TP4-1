@@ -27,7 +27,7 @@ namespace GrupoH.TP4
             List<int> ultimaCursada = new List<int>();
             this.RegistroAlumno = registro;
 
-            ultimaCursada = Alumno.UltimaCursada();
+            ultimaCursada = Alumno.UltimaCursada(registro);
 
             foreach (var materia in ultimaCursada)
             {
