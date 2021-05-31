@@ -20,7 +20,7 @@ namespace GrupoH.TP4
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
         public SolicitudDeInscripcion(int registro)
         {
-            const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal\n10 -Salir";
+            const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
@@ -65,6 +65,7 @@ namespace GrupoH.TP4
 
                 switch (opcionElegida)
                 {
+                    
                     case 1:
                         Console.WriteLine("\tMaterias Disponibles:");
                         foreach (var materia in Oferta)
@@ -74,7 +75,7 @@ namespace GrupoH.TP4
                         break;
                     case 2:
                         int contadorCursosElegidos = 1;
-                        do while (seguirEligiendoMaterias == true)
+                          while (seguirEligiendoMaterias == true)
                             {
                                 if (contadorCursosElegidos == 4)
                                 {
@@ -82,12 +83,15 @@ namespace GrupoH.TP4
                                     break;
                                 }
 
-                                materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse:");
+                                materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse o 0 para salir:");
+                                if (materiaElegida == 0) { break; }
+
                                 if (!OfertaAcademica.OfertaMateria.ContainsKey(materiaElegida))
                                 {
                                     Console.WriteLine("El codigo de la materia ingresada no existe.");
                                     continue;
                                 }
+                                
 
                                 foreach (var materia in Oferta)
                                 {
