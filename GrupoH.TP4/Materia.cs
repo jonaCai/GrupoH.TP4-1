@@ -7,18 +7,11 @@ using System.Threading.Tasks;
 namespace GrupoH.TP4
 {
     class Materia
-    {
-        
-
-        
-
+    {        
         public string Departamento { get; set; }
         public int Codigo { get;  set; }
         public string Nombre { get; set; }
-        public Dictionary<int, Curso> Cursos = new Dictionary<int, Curso>();
-        
-        
-
+        public Dictionary<int, Curso> Cursos = new Dictionary<int, Curso>();      
         
 
         public Materia(string departamento, string nombre_materia, int codigo_materia)
@@ -29,7 +22,6 @@ namespace GrupoH.TP4
 
            
         }
-
 
         public bool ExisteCurso(int codCurso)
         {

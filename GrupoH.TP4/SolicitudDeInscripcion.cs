@@ -10,7 +10,7 @@ namespace GrupoH.TP4
     {
         int Codigo;
         int RegistroAlumno;
-        List<Materia> Oferta;
+        List<Materia> Oferta = new List<Materia>();
         bool UltimasCuatro;
         bool SegundoLlamado;
         List<Curso> CursosPrincipales = new List<Curso>();

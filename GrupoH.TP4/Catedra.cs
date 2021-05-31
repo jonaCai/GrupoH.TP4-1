@@ -13,6 +13,7 @@ namespace GrupoH.TP4
         public List<Materia> Materias { get; internal set; }
         public List<Profesor> Profesores { get; internal set; }
 
+
         public Catedra(string nombre, string titular, List<Materia> materias, List<Profesor> profesores)
         {
             this.Nombre = nombre;
