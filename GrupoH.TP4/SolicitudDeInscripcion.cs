@@ -23,7 +23,7 @@ namespace GrupoH.TP4
             const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
             bool seguirEligiendoMaterias = true;
             bool salir = false;
-            int opcionElegida;
+            string opcionElegida;
             List<int> ultimaCursada = new List<int>();
             this.RegistroAlumno = registro;
 
@@ -58,7 +58,8 @@ namespace GrupoH.TP4
             do
             {
                 Console.WriteLine(menu);
-                opcionElegida = Validadores.NumeroPositivo("Elección:");
+                Console.Write("Elección:");
+                opcionElegida = Console.ReadLine();
                 int materiaElegida;
                 int cursoElegido;
                 int alternativaElegida;
@@ -66,19 +67,21 @@ namespace GrupoH.TP4
                 switch (opcionElegida)
                 {
                     
-                    case 1:
+                    case "1":
                         Console.WriteLine("\tMaterias Disponibles:");
                         foreach (var materia in Oferta)
                         {
                             Console.WriteLine(materia.Codigo + " - " + materia.Nombre);
                         }
                         break;
-                    case 2:
-                        int contadorCursosElegidos = 1;
+                    case "2":
+                        int contadorCursosElegidos = 0;
                           while (seguirEligiendoMaterias == true)
                             {
                                 if (contadorCursosElegidos == 4)
                                 {
+                                Console.WriteLine("Ya ingreso los 4 cursos.");
+
                                     seguirEligiendoMaterias = false;
                                     break;
                                 }
@@ -112,7 +115,8 @@ namespace GrupoH.TP4
 
                                             if (materia.Cursos.ContainsKey(cursoElegido))
                                             {
-                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);                                                
+                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);
+                                                contadorCursosElegidos= contadorCursosElegidos+1;
                                                 break;
                                             }
                                             else
@@ -143,17 +147,17 @@ namespace GrupoH.TP4
                                     }
                                 }
 
-                                contadorCursosElegidos++;
+                                
 
                             };                         
                         break;
-                    case 9:
+                    case "9":
                         salir = true;
                         Console.WriteLine("Volviendo al menu, Hasta la proxima!.");
                         Console.ReadLine();
                         break;
                     default:
-                        Console.WriteLine("No ha ingresado un numero, intente nuevamente");
+                        Console.WriteLine("Debe ingresar: 1, 2 o 9");
                         Console.ReadLine();
                         break;
                 }
