@@ -83,8 +83,7 @@ namespace GrupoH.TP4
 
                             if (linea.Contains("(")  && !linea.Contains("(h)") && !linea.Contains("(H)"))
                             {
-                                //&&( (linea.Contains("1") || linea.Contains("2")|| linea.Contains("3")|| linea.Contains("4")||linea.Contains("5")
-                                //|| linea.Contains("6") || linea.Contains("7") || linea.Contains("8") || linea.Contains("9")))
+                                
 
                                 if (linea.Contains("(PARA CONTADORES)"))
                                 {   
@@ -153,7 +152,7 @@ namespace GrupoH.TP4
                                 Dia_hora = linea.Substring(5, 30).ToString().Trim();
 
                                 profesor = linea.Substring(40, (linea.Length - 42)).ToString().Trim();
-                                //sfd
+                                
                                 claveCurso = int.Parse(Codigo_materia.ToString() + Num_curso.ToString());
                                 var curso = new Curso(Sede, Catedra, claveCurso, Dia_hora, profesor,Codigo_materia);
 
@@ -218,7 +217,7 @@ namespace GrupoH.TP4
 
             Console.WriteLine("Oferta cursos de la materia : "+OfertaMateria[codigo_materia].Nombre);
        
-            //Sede, Catedra, Num_curso, Dia_hora, profesor          
+                   
 
             foreach (var a in OfertaCursos)
             {
@@ -239,7 +238,7 @@ namespace GrupoH.TP4
                     Console.WriteLine("Profesor" + profesor);
                 }
                 
-                 //+ Numero_c.PadLeft(18)+ dia_horario.PadLeft(18) + profesor.PadLeft(18);                
+                             
               }
         }
     }
