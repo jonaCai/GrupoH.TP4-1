@@ -142,7 +142,8 @@ namespace GrupoH.TP4
 
                                         if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
                                         {
-                                            break;
+                                        seguirEligiendoMaterias=false;
+                                        break ;
                                         }
                                     }
                                 }
