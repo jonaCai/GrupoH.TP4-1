@@ -10,7 +10,7 @@ namespace GrupoH.TP4
     class NominaAlumnos
     {
         static public Dictionary<int, Alumno> Inscriptos = new Dictionary<int, Alumno>();
-
+        public static Dictionary<int, MateriasAlumno> MateriasCursadas = new Dictionary<int, MateriasAlumno>();
         static string nombreArchivo = "Alumnos.txt";
 
         public static void CargarNomina()
@@ -27,10 +27,12 @@ namespace GrupoH.TP4
 
                         var linea = reader.ReadLine().Split('|');
                         var numeroReg = int.Parse(linea[0]);
-                        var carrerasImportadas = linea[3].Split(',');
+                        var carrerasImportadas = linea[3].Split(',');                                                                      
                         var materiasImportadas = linea[4].Split(',');
                         var materiasImportadas2 = linea[5].Split(',');
-
+                        var fecha_inscripto = linea[6].Split(',');
+                        var notas = linea[7].Split(',');
+                        
                         foreach (var j in carrerasImportadas)
                         {
                             if (j != "")
@@ -47,9 +49,11 @@ namespace GrupoH.TP4
                             if (i != "")
                             {
                                 materiasAprobadas.Add(OfertaAcademica.OfertaMateria[codigo]);
-                            }                            
+                            }
+                                                        
                         }
-
+                        
+                        
                         foreach (var k in materiasImportadas2)
                         {
                             int codigo;
@@ -62,7 +66,29 @@ namespace GrupoH.TP4
                         }
 
                         var alumnoImportado = new Alumno(numeroReg, linea[1], linea[2], carreraAlumno, materiasAprobadas, materiasRegularizadas);
+
                         Inscriptos.Add(alumnoImportado.NroRegistro, alumnoImportado);
+
+                        int contador = 0;
+                        foreach (var i in materiasAprobadas)
+                        {
+                            var matAlumno = new MateriasAlumno(DateTime.Parse(fecha_inscripto[contador]),int.Parse(notas[contador]),i.Codigo);
+
+
+                            contador = +1;
+                                
+                        }
+                        foreach(var i in materiasRegularizadas)
+                        {
+                            var matAlumno = new MateriasAlumno(DateTime.Parse(fecha_inscripto[contador]), int.Parse(notas[contador]), i.Codigo);
+
+
+                            contador = +1;
+
+
+                        }
+                        
+
                     }
                 }
             }

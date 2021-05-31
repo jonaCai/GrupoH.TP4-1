@@ -8,6 +8,7 @@ namespace GrupoH.TP4
 {
     internal class MateriasAlumno
     {
+        //habria que agregar el registro del alumno?
         public DateTime FechaDeCursada { get; internal set; }
         public int Nota { get; internal set; }
         public int CodigoMateria { get; internal set; }

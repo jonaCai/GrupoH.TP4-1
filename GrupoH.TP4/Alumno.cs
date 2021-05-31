@@ -14,7 +14,7 @@ namespace GrupoH.TP4
         public List<Carrera> Carreras { get; internal set; }
         public List<Materia> MateriasAprobadas { get; internal set; }
         public List<Materia> MateriasRegularizadas { get; internal set; }
-        public static Dictionary<int,MateriasAlumno> MateriasCursadas = new Dictionary<int, MateriasAlumno>();
+        
 
         public Alumno(int registro, string nombre, string mail, List<Carrera> carreras, List<Materia> matAprobadas, List<Materia> matRegularizadas)
         {
@@ -59,8 +59,8 @@ namespace GrupoH.TP4
         internal static List<int> UltimaCursada()
         {
             List<int> retorno = new List<int>();
-
-            foreach (var materia in MateriasCursadas)
+            
+            foreach (var materia in NominaAlumnos.MateriasCursadas)
             {                
                 TimeSpan timeSpan = DateTime.Now - materia.Value.FechaDeCursada;
 
