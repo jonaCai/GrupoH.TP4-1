@@ -15,7 +15,7 @@ namespace GrupoH.TP4
 
             do
             {
-                Console.WriteLine(textoAImprimir);
+                Console.Write(textoAImprimir);
                 opcionElegida = Console.ReadLine().ToUpper();
 
                 if (opcionElegida == "S")
@@ -43,7 +43,7 @@ namespace GrupoH.TP4
 
             do
             {
-                Console.WriteLine(textoAImprimir);
+                Console.Write(textoAImprimir);
 
                 if (!int.TryParse(Console.ReadLine(), out numero))
                 {

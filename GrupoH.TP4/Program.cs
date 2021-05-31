@@ -15,19 +15,18 @@ namespace GrupoH.TP4
             Carrera.CargarPlanesDeEstudios();
 
             
-            const string menuPrincipal = "\tSistema de Inscripciones.";
-            //const string declaracionJurada = "Ingrese ";
+            const string menuPrincipal = "Sistema de Inscripciones 1.0";           
             int registro = 0;
             bool registroValido = false;
             
             while (registroValido == false)
             {
-                registro = Validadores.NumeroPositivo("Ingrese su Numero de Registro:");
+                registro = Validadores.NumeroPositivo("Ingrese su Numero de Registro: ");
 
                 if (!NominaAlumnos.Inscriptos.ContainsKey(registro))
                 {
                     Console.WriteLine("No existe un alumno con ese numero de registro.");
-                    Console.ReadKey();
+                    Console.ReadLine();
                 }
                 else
                 {
@@ -35,18 +34,15 @@ namespace GrupoH.TP4
                 }
             }
 
-            Console.WriteLine($"Bienvenido {NominaAlumnos.Inscriptos[registro].Nombre}!");
-            
+            Console.WriteLine($"Bienvenido {NominaAlumnos.Inscriptos[registro].Nombre}! al {menuPrincipal} ");
+            Console.WriteLine();
 
-            do
-            {
-                Console.WriteLine(menuPrincipal);
-                new SolicitudDeInscripcion(registro);
+            new SolicitudDeInscripcion(registro);
 
-            } while (true);
+          
 
 
-            //SolicitudDeInscripcion.DeclaracionJurada();            
+                    
         }
     }
 }

@@ -31,20 +31,20 @@ namespace GrupoH.TP4
 
             foreach (var materia in ultimaCursada)
             {
-                if (Validadores.SoN($"Usted Aprobo '{OfertaAcademica.OfertaMateria[materia].Nombre}'?") == "S")
+                if (Validadores.SoN($"Usted Aprobo '{OfertaAcademica.OfertaMateria[materia].Nombre}' S/N?") == "S")
                 {
                     NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Add(OfertaAcademica.OfertaMateria[materia]);
                 }
                 else
                 {
-                    if (Validadores.SoN($"Usted Regularizo '{OfertaAcademica.OfertaMateria[materia].Nombre}'?") == "S")
+                    if (Validadores.SoN($"Usted Regularizo '{OfertaAcademica.OfertaMateria[materia].Nombre}' S/N?") == "S")
                     {
                         NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Add(OfertaAcademica.OfertaMateria[materia]);
                     }
                 }
             }
 
-            if (Validadores.SoN("Ultimas 4 materias? S o N") == "S")
+            if (Validadores.SoN("Ultimas 4 materias? S/N") == "S")
             {
                 this.UltimasCuatro = true;
             }
@@ -57,8 +57,8 @@ namespace GrupoH.TP4
             
             do
             {
-
-                opcionElegida = Validadores.NumeroPositivo(menu);
+                Console.WriteLine(menu);
+                opcionElegida = Validadores.NumeroPositivo("Elección:");
                 int materiaElegida;
                 int cursoElegido;
                 int alternativaElegida;
@@ -82,8 +82,9 @@ namespace GrupoH.TP4
                                     seguirEligiendoMaterias = false;
                                     break;
                                 }
-
+                            
                                 materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse o 0 para salir:");
+                                Console.WriteLine();
                                 if (materiaElegida == 0) { break; }
 
                                 if (!OfertaAcademica.OfertaMateria.ContainsKey(materiaElegida))
@@ -97,7 +98,7 @@ namespace GrupoH.TP4
                                 {
                                     if (materia.Codigo == materiaElegida)
                                     {
-                                        Console.WriteLine($"\tCursos disponibles para {materia.Nombre}");
+                                        Console.WriteLine($"\tCursos disponibles para {materia.Nombre}: ");
 
                                         foreach (var curso in materia.Cursos)
                                         {
@@ -111,13 +112,12 @@ namespace GrupoH.TP4
 
                                             if (materia.Cursos.ContainsKey(cursoElegido))
                                             {
-                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);
-                                                materia.Cursos.Remove(cursoElegido);            // Se quita para evitar que no se vuelva a elegir.
+                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);                                                
                                                 break;
                                             }
                                             else
                                             {
-                                                Console.WriteLine("El curso seleccionado no existe.");
+                                                Console.WriteLine("El codigo de curso ingresado no existe.");
                                             }
                                         } while (true);
 
@@ -125,15 +125,14 @@ namespace GrupoH.TP4
                                         {
                                             alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
 
-                                            if (materia.Cursos.ContainsKey(alternativaElegida))
+                                            if (materia.Cursos.ContainsKey(alternativaElegida) || alternativaElegida!=cursoElegido)
                                             {
                                                 CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
-                                                materia.Cursos.Remove(alternativaElegida);
                                                 break;
                                             }
                                             else
                                             {
-                                                Console.WriteLine("El curso seleccionado no existe.");
+                                                Console.WriteLine("El codigo de curso ingresado no existe o ya lo selecciono como curso principal.");
                                             }
                                         } while (true);
 
@@ -150,12 +149,12 @@ namespace GrupoH.TP4
                         break;
                     case 9:
                         salir = true;
-                        Console.WriteLine("Saliendo...");
-                        Console.ReadKey();
+                        Console.WriteLine("Volviendo al menu, Hasta la proxima!.");
+                        Console.ReadLine();
                         break;
                     default:
                         Console.WriteLine("No ha ingresado un numero, intente nuevamente");
-                        Console.ReadKey();
+                        Console.ReadLine();
                         break;
                 }
 
@@ -177,8 +176,8 @@ namespace GrupoH.TP4
                     "2 - ADMINISTRACION\n" +
                     "3 - SISTEMAS\n" +
                     "4 - ECONOMIA\n" +
-                    "5 - ACTUARIO");
-                opcionElegida = int.Parse(Console.ReadLine());
+                    "5 - ACTUARIO");                
+                opcionElegida = Validadores.NumeroPositivo("Elección:");
 
                 switch (opcionElegida)
                 {
@@ -207,12 +206,10 @@ namespace GrupoH.TP4
                         break;
                     default:
                         Console.WriteLine("La opcion ingresada no es valida, ingrese un numero entre 1 y 6.");
-                        Console.ReadKey();
+                        Console.ReadLine();
                         break;
                 }
-
-
-
+                
             } while (ok == false);
 
             var carrera = Carrera.PlanDeEstudios.Find(x => x.Codigo == carreraElegida);
