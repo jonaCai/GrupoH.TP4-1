@@ -20,7 +20,7 @@ namespace GrupoH.TP4
         // CONSTRUCTOR que solicita los datos al momento de su creacion.
         public SolicitudDeInscripcion(int registro)
         {
-            const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal";
+            const string menu= "1 - Ver Materias Disponibles\n2 - Elegir Materia\n9 - Volver al menu principal\n10 -Salir";
             bool seguirEligiendoMaterias = true;
             bool salir = false;
             int opcionElegida;
@@ -57,8 +57,8 @@ namespace GrupoH.TP4
             
             do
             {
-                Console.WriteLine(menu);
-                opcionElegida = int.Parse(Console.ReadLine());
+
+                opcionElegida = Validadores.NumeroPositivo(menu);
                 int materiaElegida;
                 int cursoElegido;
                 int alternativaElegida;
@@ -74,70 +74,75 @@ namespace GrupoH.TP4
                         break;
                     case 2:
                         int contadorCursosElegidos = 1;
-                        do
-                        {
-                            if (contadorCursosElegidos == 4)
+                        do while (seguirEligiendoMaterias == true)
                             {
-                                seguirEligiendoMaterias = false;
-                                break;
-                            }
-
-                            materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse:");
-
-                            foreach (var materia in Oferta)
-                            {
-                                if (materia.Codigo == materiaElegida)
+                                if (contadorCursosElegidos == 4)
                                 {
-                                    Console.WriteLine($"\tCursos disponibles para {materia.Nombre}");
+                                    seguirEligiendoMaterias = false;
+                                    break;
+                                }
 
-                                    foreach (var curso in materia.Cursos)
+                                materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse:");
+                                if (!OfertaAcademica.OfertaMateria.ContainsKey(materiaElegida))
+                                {
+                                    Console.WriteLine("El codigo de la materia ingresada no existe.");
+                                    continue;
+                                }
+
+                                foreach (var materia in Oferta)
+                                {
+                                    if (materia.Codigo == materiaElegida)
                                     {
-                                        //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
-                                        OfertaAcademica.MostrarCursosxMateria(materia.Codigo);
-                                    }
+                                        Console.WriteLine($"\tCursos disponibles para {materia.Nombre}");
 
-                                    do
-                                    {
-                                        cursoElegido = Validadores.NumeroPositivo("Elija un curso principal:");
+                                        foreach (var curso in materia.Cursos)
+                                        {
+                                            //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
+                                            OfertaAcademica.MostrarCursosxMateria(materia.Codigo);
+                                        }
 
-                                        if (materia.Cursos.ContainsKey(cursoElegido))
-                                        { 
-                                            CursosPrincipales.Add(materia.Cursos[cursoElegido]);
-                                            materia.Cursos.Remove(cursoElegido);            // Se quita para evitar que no se vuelva a elegir.
+                                        do
+                                        {
+                                            cursoElegido = Validadores.NumeroPositivo("Elija un curso principal:");
+
+                                            if (materia.Cursos.ContainsKey(cursoElegido))
+                                            {
+                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);
+                                                materia.Cursos.Remove(cursoElegido);            // Se quita para evitar que no se vuelva a elegir.
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("El curso seleccionado no existe.");
+                                            }
+                                        } while (true);
+
+                                        do
+                                        {
+                                            alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
+
+                                            if (materia.Cursos.ContainsKey(alternativaElegida))
+                                            {
+                                                CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
+                                                materia.Cursos.Remove(alternativaElegida);
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("El curso seleccionado no existe.");
+                                            }
+                                        } while (true);
+
+                                        if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
+                                        {
                                             break;
                                         }
-                                        else
-                                        {
-                                            Console.WriteLine("El curso seleccionado no existe.");
-                                        }
-                                    } while (true);
-
-                                    do
-                                    {
-                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
-
-                                        if (materia.Cursos.ContainsKey(alternativaElegida))
-                                        {
-                                            CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
-                                            materia.Cursos.Remove(alternativaElegida);
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("El curso seleccionado no existe.");
-                                        }
-                                    } while (true);
-
-                                    if (Validadores.SoN("Desea agregar otra materia? S o N (Maximo 4)") == "N")
-                                    {
-                                        break;
                                     }
                                 }
-                            }
 
-                            contadorCursosElegidos++;
-                            
-                        } while (seguirEligiendoMaterias == true);                        
+                                contadorCursosElegidos++;
+
+                            };                         
                         break;
                     case 9:
                         salir = true;
