@@ -13,7 +13,10 @@ namespace GrupoH.TP4
         public string Codigo { get; internal set; }
         public string Nombre { get; internal set; }
         public List<Materia> Materias { get; internal set; }
+
         static string nombreArchivo = "Carreras.txt";
+
+
 
         public Carrera(string codigo, string nombre, List<Materia> materias)
         {

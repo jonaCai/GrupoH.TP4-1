@@ -15,6 +15,7 @@ namespace GrupoH.TP4
         int Materia { get; }
         int Curso { get; }
 
+
         public Profesor(string nombre, int dni, string mail, string catedra, int materia, int curso)
         {
             this.Nombre = nombre;
