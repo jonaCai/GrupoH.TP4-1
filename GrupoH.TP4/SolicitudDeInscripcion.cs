@@ -63,7 +63,7 @@ namespace GrupoH.TP4
                 int materiaElegida;
                 int cursoElegido;
                 int alternativaElegida;
-
+                bool ok=false;
                 switch (opcionElegida)
                 {
                     
@@ -95,8 +95,12 @@ namespace GrupoH.TP4
                                     Console.WriteLine("El codigo de la materia ingresada no existe.");
                                     continue;
                                 }
+                                foreach(var mat in Oferta)
+                                {
+                                    if (mat.Codigo == materiaElegida) { ok = true; }
+                                }
                                 
-
+                                if (ok == false) { Console.WriteLine("El codigo ingresado pertenece a otra carrera.");continue; }
                                 foreach (var materia in Oferta)
                                 {
                                     if (materia.Codigo == materiaElegida)
