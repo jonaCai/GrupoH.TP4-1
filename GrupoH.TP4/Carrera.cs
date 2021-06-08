@@ -13,8 +13,10 @@ namespace GrupoH.TP4
         public string Codigo { get; internal set; }
         public string Nombre { get; internal set; }
         public List<Materia> Materias { get; internal set; }
+        public Dictionary<int, List<int>> Correlatividades = new Dictionary<int, List<int>>();       // Key = Nº Materia | Value = Lista de Nº de materias 
 
         static string nombreArchivo = "Carreras.txt";
+        static string nombreArchivo2 = "Correlatividades.txt";
 
 
 
@@ -55,6 +57,50 @@ namespace GrupoH.TP4
                 Console.WriteLine("No se ha encontrado la tabla maestra 'Alumnos.txt' en la carpeta 'bin/debug'.");
                 Console.ReadKey();
             }
+
+            if (File.Exists(nombreArchivo2))
+            {
+                using (var reader = new StreamReader(nombreArchivo2))
+                {
+                    List<int> correlativas = new List<int>();
+                    var indice = -1;
+                    var carrera = "";
+                    var codMateria = -1;
+
+                    while (!reader.EndOfStream)
+                    {
+                        var linea = reader.ReadLine();
+
+                        if (char.IsLetter(linea[0]))
+                        {
+                            if (carrera == "")
+                            {
+                                carrera = linea;
+                                indice = Carrera.PlanDeEstudios.FindIndex(x => x.Codigo == carrera);
+                                continue;
+                            }
+                            else if (carrera != "" && carrera != linea)
+                            {
+                                indice = Carrera.PlanDeEstudios.FindIndex(x => x.Codigo == linea);
+                                continue;
+                            }
+                        }
+
+                        var separado = linea.Split('|');
+                        codMateria = int.Parse(separado[0]);
+                        var codCorrelativas = separado[1].Split(',');
+
+                        foreach (var item in codCorrelativas)
+                        {
+                            correlativas.Add(int.Parse(item));
+                        }
+
+                        Carrera.PlanDeEstudios[indice].Correlatividades.Add(codMateria, correlativas);
+                        correlativas.Clear();
+                    }
+                }
+            }
         }
+
     }
 }
