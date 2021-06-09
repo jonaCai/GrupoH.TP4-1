@@ -26,5 +26,14 @@ namespace GrupoH.TP4
             cod_materia = codigo_materia;
         }
 
+        public static string devolverCurso(Curso a)
+        {
+            string texto;
+
+            texto = $"Materia/codigo: {a.cod_materia}\n Catedra: {a.Catedra}\n Profesor: {a.Profesor} \n Codigo del curso: {a.Codigo} \n Sede: {a.Sede} \n Dia/horario: {a.DiaHorario} ";
+            
+
+            return texto;
+        }
     }
 }
