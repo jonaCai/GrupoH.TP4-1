@@ -107,11 +107,10 @@ namespace GrupoH.TP4
                                     {
                                         Console.WriteLine($"\tCursos disponibles para {materia.Nombre}: ");
 
-                                        foreach (var curso in materia.Cursos)
-                                        {
+                                       
                                             //Console.WriteLine(curso.Value.Codigo + " - " + curso.Value.Profesor + " - " + curso.Value.Horario + " - " + curso.Value.Catedra);
                                             OfertaAcademica.MostrarCursosxMateria(materia.Codigo);
-                                        }
+                                        
 
                                         do
                                         {
@@ -133,7 +132,7 @@ namespace GrupoH.TP4
                                         {
                                             alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
 
-                                            if (materia.Cursos.ContainsKey(alternativaElegida) || alternativaElegida!=cursoElegido)
+                                            if (materia.Cursos.ContainsKey(alternativaElegida) && alternativaElegida!=cursoElegido)
                                             {
                                                 CursosAlternativos.Add(materia.Cursos[alternativaElegida]);
                                                 break;
