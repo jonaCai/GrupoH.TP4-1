@@ -78,7 +78,8 @@ namespace GrupoH.TP4
                         int contadorCursosElegidos = 0;
                           while (seguirEligiendoMaterias == true)
                             {
-                                if (contadorCursosElegidos == 4)
+                                ok = false;
+                                    if (contadorCursosElegidos == 4)
                                 {
                                 Console.WriteLine("Ya ingreso los 4 cursos.");
 
@@ -86,13 +87,13 @@ namespace GrupoH.TP4
                                     break;
                                 }
                             
-                                materiaElegida = Validadores.NumeroPositivo("Ingrese el codigo de la materia a la que desea inscribirse o 0 para salir:");
+                                materiaElegida = Validadores.NumeroPositivo("Ingrese el código de la materia a la que desea inscribirse o 0 para salir:");
                                 Console.WriteLine();
                                 if (materiaElegida == 0) { break; }
 
                                 if (!OfertaAcademica.OfertaMateria.ContainsKey(materiaElegida))
                                 {
-                                    Console.WriteLine("El codigo de la materia ingresada no existe.");
+                                    Console.WriteLine("El código de la materia ingresada no existe.");
                                     continue;
                                 }
                                 foreach(var mat in Oferta)
@@ -100,7 +101,9 @@ namespace GrupoH.TP4
                                     if (mat.Codigo == materiaElegida) { ok = true; }
                                 }
                                 
-                                if (ok == false) { Console.WriteLine("El codigo ingresado pertenece a otra carrera.");continue; }
+                                if (ok == false) { Console.WriteLine("El código ingresado pertenece a otra carrera o ya fue añadido a su solicitud de inscripción.");continue; }
+
+                               
                                 foreach (var materia in Oferta)
                                 {
                                     if (materia.Codigo == materiaElegida)
@@ -118,8 +121,9 @@ namespace GrupoH.TP4
 
                                             if (materia.Cursos.ContainsKey(cursoElegido))
                                             {
-                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);
+                                                CursosPrincipales.Add(materia.Cursos[cursoElegido]);                                                
                                                 contadorCursosElegidos= contadorCursosElegidos+1;
+
                                                 break;
                                             }
                                             else
@@ -150,7 +154,8 @@ namespace GrupoH.TP4
                                         }
                                     }
                                 }
-                            };                         
+                                Oferta.RemoveAll(x => x.Codigo == materiaElegida);
+                        };                         
                         break;
                     case "9":
                         salir = true;
