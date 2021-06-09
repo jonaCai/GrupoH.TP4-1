@@ -54,7 +54,7 @@ namespace GrupoH.TP4
             }
             else
             {
-                Console.WriteLine("No se ha encontrado la tabla maestra 'Alumnos.txt' en la carpeta 'bin/debug'.");
+                Console.WriteLine("No se ha encontrado la tabla maestra 'Carreras.txt' en la carpeta 'bin/debug'.");
                 Console.ReadKey();
             }
 
@@ -100,6 +100,7 @@ namespace GrupoH.TP4
                     }
                 }
             }
+            else { Console.WriteLine("No se ha encontrado la tabla maestra 'Correlatividades.txt' en la carpeta 'bin/debug'."); }
         }
 
     }

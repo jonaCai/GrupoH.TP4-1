@@ -54,11 +54,6 @@ namespace GrupoH.TP4
             }
 
             Oferta = CrearOfertaPersonalizada(registro, UltimasCuatro);
-
-            if (UltimasCuatro != true)
-            {
-                
-            }
             
             do
             {
@@ -187,10 +182,11 @@ namespace GrupoH.TP4
             {
                 Console.WriteLine("Elija la Carrera:\n" +
                     "1 - CONTADOR\n" +
-                    "2 - ADMINISTRACION\n" +
+                    "2 - ADMINISTRACIÓN\n" +
                     "3 - SISTEMAS\n" +
-                    "4 - ECONOMIA\n" +
-                    "5 - ACTUARIO");                
+                    "4 - ECONOMÍA\n" +
+                    "5 - ACTUARIO ADMINISTRACIÓN\n" +
+                    "6 - ACTUARIO ECONOMÍA\n");                
                 opcionElegida = Validadores.NumeroPositivo("Elección:");
 
                 switch (opcionElegida)
@@ -217,6 +213,7 @@ namespace GrupoH.TP4
                         break;
                     case 6:
                         carreraElegida = "ACE";
+                        ok = true;
                         break;
                     default:
                         Console.WriteLine("La opcion ingresada no es valida, ingrese un numero entre 1 y 6.");
