@@ -215,7 +215,7 @@ namespace GrupoH.TP4
         public static void MostrarOfertaCursos(int codigo_materia)
         {
 
-            Console.WriteLine("Oferta cursos de la materia : "+OfertaMateria[codigo_materia].Nombre);
+            //Console.WriteLine("Oferta cursos de la materia : "+OfertaMateria[codigo_materia].Nombre);
        
                    
 
