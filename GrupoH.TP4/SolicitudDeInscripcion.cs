@@ -151,9 +151,6 @@ namespace GrupoH.TP4
                                         }
                                     }
                                 }
-
-                                
-
                             };                         
                         break;
                     case "9":
@@ -233,9 +230,17 @@ namespace GrupoH.TP4
                 {
                     if (!NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Contains(materia))
                     {
-                        if (ultimasCuatro != true)
+                        if (ultimasCuatro == true)
                         {
-                            if (Carrera.PlanDeEstudios[indiceCarrera].Correlatividades.ContainsKey(materia.Codigo))
+                            retorno.Add(materia);                            
+                        }
+                        else
+                        {
+                            if (!Carrera.PlanDeEstudios[indiceCarrera].Correlatividades.ContainsKey(materia.Codigo))
+                            {
+                                retorno.Add(materia);                                
+                            }
+                            else
                             {
                                 bool corAprobadas = true;
 
@@ -252,14 +257,6 @@ namespace GrupoH.TP4
                                     retorno.Add(materia);
                                 }
                             }
-                            else
-                            {
-                                retorno.Add(materia);
-                            }
-                        }
-                        else
-                        {
-                            retorno.Add(materia);
                         }
                     }
                     else
@@ -272,34 +269,6 @@ namespace GrupoH.TP4
                     continue;
                 }
             }
-
-            /*if (ultimasCuatro == false)
-            {
-                foreach (var materia in retorno)
-                {
-                    if (Carrera.PlanDeEstudios[indiceCarrera].Correlatividades.ContainsKey(materia.Codigo))
-                    {
-                        List<int> lista = Carrera.PlanDeEstudios[indiceCarrera].Correlatividades[materia.Codigo];
-
-                        foreach (var correlativa in lista)
-                        {
-                            if (!NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Exists(x => x.Codigo == correlativa))
-                            {
-                                if (!NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Exists(x => x.Codigo == correlativa))
-                                {
-                                    retorno.Remove(retorno.Find(y => y.Codigo == materia.Codigo));
-                                }
-                            }
-                        }
-
-                        /*if (!(NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Exists(x => x.Codigo == correlativa)) && !(NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Exists(x => x.Codigo == correlativa)))
-                        {
-                            existe = false;
-                        }
-
-                    }
-                }                
-            }*/
 
             return retorno;
         }
