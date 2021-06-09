@@ -61,14 +61,14 @@ namespace GrupoH.TP4
             if (File.Exists(nombreArchivo2))
             {
                 using (var reader = new StreamReader(nombreArchivo2))
-                {
-                    List<int> correlativas = new List<int>();
+                {                  
                     var indice = -1;
                     var carrera = "";
                     var codMateria = -1;
 
                     while (!reader.EndOfStream)
                     {
+                        List<int> correlativas = new List<int>();
                         var linea = reader.ReadLine();
 
                         if (char.IsLetter(linea[0]))
@@ -89,14 +89,14 @@ namespace GrupoH.TP4
                         var separado = linea.Split('|');
                         codMateria = int.Parse(separado[0]);
                         var codCorrelativas = separado[1].Split(',');
+                        
 
                         foreach (var item in codCorrelativas)
                         {
                             correlativas.Add(int.Parse(item));
                         }
 
-                        Carrera.PlanDeEstudios[indice].Correlatividades.Add(codMateria, correlativas);
-                        correlativas.Clear();
+                        Carrera.PlanDeEstudios[indice].Correlatividades.Add(codMateria, correlativas);                        
                     }
                 }
             }

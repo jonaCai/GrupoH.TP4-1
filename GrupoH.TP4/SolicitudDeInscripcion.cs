@@ -53,7 +53,12 @@ namespace GrupoH.TP4
                 this.UltimasCuatro = false;
             }
 
-            Oferta = CrearOfertaPersonalizada(registro);
+            Oferta = CrearOfertaPersonalizada(registro, UltimasCuatro);
+
+            if (UltimasCuatro != true)
+            {
+                
+            }
             
             do
             {
@@ -171,7 +176,7 @@ namespace GrupoH.TP4
         }
 
 
-        private static List<Materia> CrearOfertaPersonalizada(int registro)
+        private static List<Materia> CrearOfertaPersonalizada(int registro, bool ultimasCuatro)
         {
             List<Materia> retorno = new List<Materia>();
             int opcionElegida;
@@ -222,6 +227,7 @@ namespace GrupoH.TP4
             } while (ok == false);
 
             var carrera = Carrera.PlanDeEstudios.Find(x => x.Codigo == carreraElegida);
+            var indiceCarrera = Carrera.PlanDeEstudios.FindIndex(x => x.Codigo == carreraElegida);
             Console.WriteLine($"La carrera elegida fue: {carrera.Nombre}");
 
             foreach (var materia in carrera.Materias)
@@ -230,19 +236,74 @@ namespace GrupoH.TP4
                 {
                     if (!NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Contains(materia))
                     {
-                        retorno.Add(materia);
+                        if (ultimasCuatro != true)
+                        {
+                            if (Carrera.PlanDeEstudios[indiceCarrera].Correlatividades.ContainsKey(materia.Codigo))
+                            {
+                                bool corAprobadas = true;
+
+                                foreach (var item in Carrera.PlanDeEstudios[indiceCarrera].Correlatividades[materia.Codigo])
+                                {
+                                    if (!(NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Exists(x => x.Codigo == item)) && !(NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Exists(x => x.Codigo == item)))
+                                    {
+                                        corAprobadas = false;
+                                    }
+                                }
+
+                                if (corAprobadas == true)
+                                {
+                                    retorno.Add(materia);
+                                }
+                            }
+                            else
+                            {
+                                retorno.Add(materia);
+                            }
+                        }
+                        else
+                        {
+                            retorno.Add(materia);
+                        }
                     }
                     else
                     {
                         continue;
-                    }                    
+                    }
                 }
                 else
                 {
                     continue;
                 }
             }
-            
+
+            /*if (ultimasCuatro == false)
+            {
+                foreach (var materia in retorno)
+                {
+                    if (Carrera.PlanDeEstudios[indiceCarrera].Correlatividades.ContainsKey(materia.Codigo))
+                    {
+                        List<int> lista = Carrera.PlanDeEstudios[indiceCarrera].Correlatividades[materia.Codigo];
+
+                        foreach (var correlativa in lista)
+                        {
+                            if (!NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Exists(x => x.Codigo == correlativa))
+                            {
+                                if (!NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Exists(x => x.Codigo == correlativa))
+                                {
+                                    retorno.Remove(retorno.Find(y => y.Codigo == materia.Codigo));
+                                }
+                            }
+                        }
+
+                        /*if (!(NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Exists(x => x.Codigo == correlativa)) && !(NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Exists(x => x.Codigo == correlativa)))
+                        {
+                            existe = false;
+                        }
+
+                    }
+                }                
+            }*/
+
             return retorno;
         }
     }
