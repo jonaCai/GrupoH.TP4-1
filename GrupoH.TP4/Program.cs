@@ -57,7 +57,8 @@ namespace GrupoH.TP4
                 
             }
             if (registroValido == true) { new SolicitudDeInscripcion(registro); }
-            
+
+            File.Delete("SolicitudesInscripcion.txt");
         }
     }
 }
