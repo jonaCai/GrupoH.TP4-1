@@ -77,6 +77,7 @@ namespace GrupoH.TP4
                         break;
                     case "2":
                         int contadorCursosElegidos = 0;
+                        if (seguirEligiendoMaterias == false) { Console.WriteLine("Ya se inscribio satisfactoriamente"); }
                         while (seguirEligiendoMaterias == true)
                         {
                             ok = false;
@@ -135,7 +136,7 @@ namespace GrupoH.TP4
 
                                     do
                                     {
-                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo:");
+                                        alternativaElegida = Validadores.NumeroPositivo("Elija un curso alternativo o '0' para avanzar:");
 
                                         if (materia.Cursos.ContainsKey(alternativaElegida) && alternativaElegida != cursoElegido)
                                         {
@@ -144,6 +145,7 @@ namespace GrupoH.TP4
                                         }
                                         else
                                         {
+                                            if (alternativaElegida == 0) { break; }
                                             Console.WriteLine("El codigo de curso ingresado no existe o ya lo selecciono como curso principal.");
                                         }
                                     } while (true);
@@ -183,6 +185,8 @@ namespace GrupoH.TP4
                     case "9":
                         salir = true;
                         Console.WriteLine("Volviendo al menu, Hasta la proxima!.");
+                                              
+                       
                         Console.ReadLine();
                         break;
                     default:
