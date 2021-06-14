@@ -38,9 +38,14 @@ namespace GrupoH.TP4
                 }
                 else
                 {
+                    NominaAlumnos.Inscriptos[registro].MateriasAprobadas.Remove(OfertaAcademica.OfertaMateria[materia]);
                     if (Validadores.SoN($"Usted Regularizo '{OfertaAcademica.OfertaMateria[materia].Nombre}' S/N?") == "S")
                     {
                         NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Add(OfertaAcademica.OfertaMateria[materia]);
+                    }
+                    else
+                    {                        
+                        NominaAlumnos.Inscriptos[registro].MateriasRegularizadas.Remove(OfertaAcademica.OfertaMateria[materia]);
                     }
                 }
             }
