@@ -82,7 +82,7 @@ namespace GrupoH.TP4
                             var keymaAlumno = alumnoImportado.NroRegistro.ToString()+ i.Codigo.ToString();
 
                             MateriasCursadas.Add(keymaAlumno, matAlumno);
-                            //validaciones para fecha y notas?
+       
                             contador =contador +1;
                                 
                         }
@@ -99,5 +99,8 @@ namespace GrupoH.TP4
                 Console.ReadKey();
             }
         }
+
+
+
     }
 }
